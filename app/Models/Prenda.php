@@ -16,4 +16,11 @@ class Prenda extends Model
         'cantidad_actual', 
         'sobrante_del_dia_anterior'
     ];
+    
+
+    public function local()
+{
+    return $this->belongsTo(Local::class);
+}
+
 }

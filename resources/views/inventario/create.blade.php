@@ -8,9 +8,10 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="my-4 text-center">Añadir Nueva Prenda</h1>
+        <a href="{{ route('inventario.create', ['localId' => $local->id]) }}" class="btn btn-success mt-4">Añadir Nueva Prenda</a>
+        
+        <form action="{{ route('inventario.store', ['localId' => $local->id]) }}" method="POST">
 
-        <form action="{{ route('inventario.store') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="nombre">Nombre de la Prenda</label>
@@ -28,7 +29,8 @@
             </div>
 
             <button type="submit" class="btn btn-success mt-3">Guardar Prenda</button>
-            <a href="{{ route('inventario.index') }}" class="btn btn-secondary mt-3">Cancelar</a>
+            <a href="{{ route('inventario.index', ['localId' => $local->id]) }}" class="btn btn-secondary mt-3">Cancelar</a>
+
         </form>
     </div>
 

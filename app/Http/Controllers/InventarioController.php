@@ -3,30 +3,48 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Prenda;
+use App\Models\Local;
 
 class InventarioController extends Controller
 
 {
+    public function dashboard()
+    {
+        // Obtener todos los locales desde la base de datos
+        $locales = Local::all();
+    
+        // Pasar los locales a la vista
+        return view('dashboard', compact('locales'));
+    }
+    
       
-    public function index()
+    public function index($localId)
     {
-        $prendas = Prenda::all();
-        return view('inventario.index', compact('prendas'));
+        $local = Local::findOrFail($localId);
+        $prendas = $local->prendas;  // Obtener las prendas asociadas a ese local
+        return view('inventario.index', compact('prendas', 'local'));
     }
-    public function create()
+    
+    public function create($localId)
     {
-        return view('inventario.create');
+        
+        $local = Local::findOrFail($localId);
+        // Puedes cargar la vista para crear una nueva prenda
+        return view('inventario.create', compact('local'));
     }
+    
 
-    public function store(Request $request)
+    public function store(Request $request, $localId)
     {
+        $local = Local::findOrFail($localId);
+    
         $data = $request->validate([
             'nombre' => 'required|string|max:255',
             'talla' => 'required|string|max:5',
             'cantidad_inicial' => 'required|integer|min:0',
         ]);
-
-        Prenda::create([
+    
+        $local->prendas()->create([
             'nombre' => $data['nombre'],
             'talla' => $data['talla'],
             'cantidad_inicial' => $data['cantidad_inicial'],
@@ -34,13 +52,26 @@ class InventarioController extends Controller
             'ventas_del_dia' => 0,
             'sobrante_del_dia_anterior' => $data['cantidad_inicial'],
         ]);
-
-        return redirect()->route('inventario.index')->with('success', 'Prenda añadida correctamente.');
+    
+        return redirect()->route('inventario.index', ['localId' => $localId])->with('success', 'Prenda añadida correctamente.');
     }
+    
+    public function mostrarLocales()
+{
+    $locales = Local::all();
+    return view('inventario.locales', compact('locales'));
+}
 
-    public function actualizarInventario(Request $request, $id)
-    {
-        $prenda = Prenda::findOrFail($id);
+public function verInventario($localId)
+{
+    $local = Local::findOrFail($localId);
+    $prendas = Prenda::where('local_id', $localId)->get();
+    return view('inventario.index', compact('prendas', 'local'));
+}
+
+   public function actualizarInventario(Request $request, $localId, $prendaId)
+{
+    $prenda = Prenda::where('id', $prendaId)->where('local_id', $localId)->firstOrFail();
 
         // Validar los datos
         $data = $request->validate([
@@ -82,5 +113,6 @@ class InventarioController extends Controller
     return redirect()->back()->with('success', 'Prenda eliminada correctamente');
 }
 
-}
 
+
+}

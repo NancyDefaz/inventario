@@ -21,6 +21,8 @@ return new class extends Migration
         $table->integer('sobrante_del_dia_anterior')->default(0);
         $table->timestamps();
     });
+
+
 }
 
 

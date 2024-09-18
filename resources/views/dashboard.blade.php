@@ -16,45 +16,21 @@
                 </p>
 
                 <!-- Sección de Locales -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Local 1 -->
-                    <div class="bg-white dark:bg-gray-700 shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition">
-                        <h4 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Local 1</h4>
-                        <p class="text-gray-600 dark:text-gray-400 mb-6">Ubicación: Av. Central</p>
-                        <a href="{{ route('inventario.index') }}">
-                            <button class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600">
-                                Ver Inventario
-                            </button>
-                        </a>
-                    </div>
-
-                    <!-- Local 2 -->
-                    <div class="bg-white dark:bg-gray-700 shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition">
-                        <h4 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Local 2</h4>
-                        <p class="text-gray-600 dark:text-gray-400 mb-6">Ubicación: Plaza Norte</p>
-                        <button class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600">
-                            Ver Inventario
-                        </button>
-                    </div>
-
-                    <!-- Local 3 -->
-                    <div class="bg-white dark:bg-gray-700 shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition">
-                        <h4 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Local 3</h4>
-                        <p class="text-gray-600 dark:text-gray-400 mb-6">Ubicación: Centro Histórico</p>
-                        <button class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600">
-                            Ver Inventario
-                        </button>
-                    </div>
-
-                    <!-- Local 4 -->
-                    <div class="bg-white dark:bg-gray-700 shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition">
-                        <h4 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Local 4</h4>
-                        <p class="text-gray-600 dark:text-gray-400 mb-6">Ubicación: Mall Sur</p>
-                        <button class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600">
-                            Ver Inventario
-                        </button>
-                    </div>
+                @foreach ($locales as $local)
+                <!-- Aquí solo necesitamos un bloque 'div' por local -->
+                <div class="bg-white dark:bg-gray-700 shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition">
+                    <h4 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">{{ $local->nombre }}</h4>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">Ubicación: {{ $local->ubicacion }}</p>
+                    <!-- Botón para ver el inventario -->
+                    <a href="{{ route('inventario.index', ['localId' => $local->id]) }}">
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600">Ver Inventario</button>
+                    </a>
+                    <!-- Botón para agregar una prenda -->
+                    <a href="{{ route('inventario.create', ['localId' => $local->id]) }}">
+                        <button class="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600">Agregar Prenda</button>
+                    </a>
                 </div>
+                @endforeach
             </div>
         </div>
     </div>
