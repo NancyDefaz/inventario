@@ -5,6 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario de Prendas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #c3d0e3; /* Fondo suave y claro para la página */
+        }
+        .container {
+            background-color: #ddbfbf; /* Fondo blanco para el contenedor principal */
+            border-radius: 8px; /* Bordes redondeados */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            padding: 20px;
+            margin-top: 20px;
+        }
+        h1 {
+            color: #333333; /* Color del título */
+        }
+        .alert-success {
+            margin-top: 20px; /* Espacio superior para la alerta */
+        }
+        .btn-secondary {
+            margin-right: 10px; /* Espacio entre los botones */
+        }
+        .btn-group button {
+            margin-right: 5px; /* Espacio entre los botones del grupo */
+        }
+        table {
+            background-color: #f8f9fa; /* Fondo más claro para la tabla */
+        }
+        thead {
+            background-color: #e9ecef; /* Fondo más claro para el encabezado de la tabla */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
