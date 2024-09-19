@@ -9,6 +9,12 @@
 <body>
     <div class="container">
         <h1 class="my-4 text-center">Inventario de Prendas</h1>
+
+        <!-- Botón para ir al Dashboard -->
+        <div class="d-flex justify-content-start mb-4">
+            <a href="{{ route('dashboard') }}" class="btn btn-secondary">Volver al Inicio</a>
+        </div>
+
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -46,7 +52,6 @@
                         <td>
                             <div class="btn-group">
                                 <button type="submit" class="btn btn-primary btn-sm">Actualizar</button>
-                                <!--<a href="#" class="btn btn-warning btn-sm">Editar</a>-->
                                 <!-- Botón para abrir el modal de confirmación -->
                                 <button type="button" class="btn btn-danger btn-sm" 
                                     data-bs-toggle="modal" 
@@ -54,8 +59,6 @@
                                     onclick="setDeleteModal('{{ $prenda->nombre }}', '{{ route('inventario.eliminar', ['localId' => $local->id, 'prendaId' => $prenda->id]) }}')">
                                     Eliminar
                                 </button>
-                                
-                            <!--    <a href="#" class="btn btn-secondary btn-sm">Deshacer</a>-->
                             </div>
                         </td>
                     </form>

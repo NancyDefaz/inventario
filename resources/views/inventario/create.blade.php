@@ -8,8 +8,21 @@
 </head>
 <body>
     <div class="container">
-        <a href="{{ route('inventario.create', ['localId' => $local->id]) }}" class="btn btn-success mt-4">Añadir Nueva Prenda</a>
-        
+       
+                <!-- Título de la página -->
+        <h1 class="my-4 text-center">Añadir Prendas</h1>
+                <!-- Botón para ir al Dashboard -->
+                <div class="d-flex justify-content-start mb-4">
+                    <!-- Botón para regresar, con margen derecho para separarlo -->
+                    <a href="{{ route('inventario.index', ['localId' => $local->id]) }}" class="btn btn-secondary me-3">Regresar</a>
+                    
+                    <!-- Botón para ir al Dashboard -->
+                    <a href="{{ route('dashboard') }}" class="btn btn-secondary">Inicio</a>
+                </div>
+                
+                
+
+
         <form action="{{ route('inventario.store', ['localId' => $local->id]) }}" method="POST">
 
             @csrf
